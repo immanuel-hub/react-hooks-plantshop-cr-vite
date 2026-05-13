@@ -1,93 +1,83 @@
-# Phase 2 Code Challenge: Plantsy
+# Plantsy 🌱
+
+Plantsy is a React-based admin dashboard for a plant store. It allows store admins to view, add, search, and manage plant inventory in real time.
 
 ## Demo
 
-Use this gif as an example of how the app should work.
-
 ![Demo GIF](./demo.gif)
 
-## Instructions
+## Table of Contents
 
-Welcome to Plantsy! You've been tasked with building out some features for the
-admin side of a plant store. The designers have put together the components and
-CSS. Now it's up to you to bring the features to life by adding stateful logic
-as well as persisting data to the backend via our API.
+- [About](#about)
+- [Features](#features)
+- [Setup](#setup)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Tech Stack](#tech-stack)
 
-Your job will be to make our app work according to the user stories you will
-find the [Deliverables](#Deliverables) section.
+## About
+
+Plantsy connects a React frontend to a JSON backend via fetch requests. State is managed with React hooks (`useState`, `useEffect`) to keep the UI in sync with the backend.
+
+## Features
+
+- View all plants on page load (fetched from backend)
+- Add a new plant via a form (persisted to backend via POST)
+- Mark a plant as "Out of Stock" / "In Stock" (client-side toggle)
+- Search/filter plants by name in real time
 
 ## Setup
 
-1. Run `npm install` in your terminal.
-2. Run `npm run server`. This will run your backend on port `6001`.
-3. In a new terminal, run `npm run dev`.
+1. Clone the repository and navigate into the project folder.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the backend server (runs on port `6001`):
+   ```bash
+   npm run server
+   ```
+4. In a separate terminal, start the frontend dev server:
+   ```bash
+   npm run dev
+   ```
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-Make sure to open [http://localhost:6001/plants](http://localhost:6001/plants)
-in the browser to verify that your backend is working before you proceed!
+> Verify the backend is running by visiting [http://localhost:6001/plants](http://localhost:6001/plants).
 
-## Endpoints
+## Usage
 
-The base URL for your backend is: `http://localhost:6001`
+| Action | How |
+|---|---|
+| View all plants | Plants load automatically on startup |
+| Add a plant | Fill in the form at the top and click "Add Plant" |
+| Mark as sold out | Click the "In Stock" button on any plant card |
+| Search plants | Type in the search bar to filter by name |
 
-## Deliverables
+## API Endpoints
 
-As a user:
+Base URL: `http://localhost:6001`
 
-1. When the app starts, I can see all plants.
-2. I can add a new plant to the page by submitting the form.
-3. I can mark a plant as "sold out".
-4. I can search for plants by their name and see a filtered list of plants.
-
-### Endpoints for Core Deliverables
-
-#### GET /plants
-
-Example Response:
+### `GET /plants`
+Returns all plants.
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "Aloe",
-    "image": "./images/aloe.jpg",
-    "price": 15.99
-  },
-  {
-    "id": 2,
-    "name": "ZZ Plant",
-    "image": "./images/zz-plant.jpg",
-    "price": 25.98
-  }
+  { "id": 1, "name": "Aloe", "image": "./images/aloe.jpg", "price": 15.99 }
 ]
 ```
 
-#### POST `/plants`
+### `POST /plants`
+Creates a new plant. Requires `Content-Type: application/json`.
 
-Required Headers:
-
-```js
-{
-  "Content-Type": "application/json"
-}
-```
-
-Request Object:
-
+Request body:
 ```json
-{
-  "name": "string",
-  "image": "string",
-  "price": number
-}
+{ "name": "string", "image": "string", "price": "string" }
 ```
 
-Example Response:
+## Tech Stack
 
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 15.99
-}
-```
+- [React 18](https://react.dev/) — UI library
+- [Vite](https://vitejs.dev/) — build tool and dev server
+- [json-server](https://github.com/typicode/json-server) — mock REST API backend
+- [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) — test suite
